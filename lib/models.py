@@ -40,3 +40,17 @@ class Produce(Base):
     #relationships
     farmer = relationship('Farmer',back_populates='produce') # one farmer can produce many produce many-one
     orders= relationship('Order',back_populates='produce') # one produce can have many orders 1-many
+
+#orders table
+class Order(Base):
+    __tablename__='orders'
+    id=Column(Integer,primary_key=True)
+    consumer_name=Column(String,nullable=False)
+    produce_name=Column(String,nullable=False)
+    produce_id=Column(Integer,ForeignKey('produce.id'),nullable=False)
+    farmer_id=Column(Integer,ForeignKey('farmers.id'),nullable=False)
+
+#relationships
+    produce =relationship('Produce',back_populates='orders') #many to one 1 produce can have many orders
+    farmer=relationship('Farmer',back_populates='orders') #one farmer can have many orders
+    consumer = relationship('Consumer', back_populates='orders')
