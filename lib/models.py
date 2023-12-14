@@ -26,3 +26,17 @@ class Farmer(Base):
     #relationships 
     produce =relationship('Produce',back_populates='farmer') #one to many relationship between farmer and produce
     orders = relationship('Order',back_populates='farmer') #a farmer can have many orders
+
+
+# produce table
+class Produce(Base):
+    __tablename__='produce'
+    id=Column(Integer,primary_key=True)
+    name=Column(String,nullable=False)
+    farmer_id =Column(Integer,ForeignKey('farmers.id'))
+    price=Column(Integer,nullable=False)
+    review = Column(Integer, nullable=True)
+
+    #relationships
+    farmer = relationship('Farmer',back_populates='produce') # one farmer can produce many produce many-one
+    orders= relationship('Order',back_populates='produce') # one produce can have many orders 1-many
