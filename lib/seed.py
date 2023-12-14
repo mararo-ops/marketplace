@@ -31,3 +31,6 @@ farmers = [
         city=fake.city()
     )
 for i in range(10)] #creating 10 records 
+#adding the session
+session.add_all(farmers)
+session.commit()
