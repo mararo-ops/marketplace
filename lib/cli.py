@@ -112,3 +112,14 @@ def place_order(): #placing an order as a customer
             break #a non-empty produce_name is provided
         else:
             click.echo("Produce Name cannot be empty. Please provide a produce name.")
+
+#finding the product by name
+    product = session.query(Produce).filter_by(name=produce_name).first() 
+
+    if product:
+        new_order=Order(consumer_name=consumer_name,produce_name=produce_name, produce_id=product.id, farmer_id=product.farmer.id)
+        session.add(new_order)
+        session.commit()
+        click.echo("Order made  successfully")
+    else:
+        click.echo("Order not successfully made")
