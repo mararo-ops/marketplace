@@ -65,3 +65,15 @@ for h in range(10):
    session.add(order)
 session.commit()
         
+#adding data to the consumer table
+order_list =session.query(Order).all() #getting a list of all the orders
+for k in range(10):
+   random_order = random.choice(order_list)  # Selecting  a random order
+   consumer= Consumer(
+         name=fake.name(),
+         order_id=random_order.id
+   )
+ 
+   session.add(consumer)
+session.commit()
+
