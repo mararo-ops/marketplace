@@ -19,3 +19,15 @@ if __name__=='__main__':
 
 
 print("Seeding Farmers")
+
+#populating the farmer table with few farmers
+
+
+farmers = [
+    Farmer(
+        name=fake.name(),
+        email=fake.email(),
+        phone_number= fake.phone_number(),
+        city=fake.city()
+    )
+for i in range(10)] #creating 10 records 
