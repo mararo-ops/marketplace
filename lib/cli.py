@@ -46,3 +46,53 @@ def farmer_profile(): # creating a farmer profile
             break  # Exiting  the loop if a non-empty city is provided
         else:
             click.echo("City cannot be empty. Please provide a city.")
+
+#creating a new farmer record and adding it to the database
+    new_farmer=Farmer(name=name,email=email,phone_number=phone_number,city=city)
+    session.add(new_farmer)
+    session.commit()
+    click.echo("Created new farmer profile successfully!")
+
+@cli.command()
+def add_produce(): #adding a new produce
+    """add new product"""
+    click.echo("Enter new produce details:")
+    while True:
+        name = click.prompt("Enter Product name",default='')
+        if name:
+            break  # Exiting  the loop if a non-empty name is provided
+        else:
+            click.echo("Product name cannot be empty. Please provide a name.")
+
+    while True:
+        try:
+            price = click.prompt("Price", type=float)
+            if price <= 0: #if its less than 0 
+                click.echo("Price must be a positive number.")
+            else:
+                break  # Exiting  the loop if a valid price is provided
+        except ValueError:
+            click.echo("Price must be a numeric value.")
+
+
+    while True:
+        farmer_id = click.prompt("Enter your farmer ID" , default='')
+        if farmer_id:
+            if farmer_id.isdigit():  # Validating  that input is a numeric string
+                break  # Exiting  the loop if a valid farmer ID is provided
+            else:
+                click.echo("Farmer ID must be a numeric value.")
+        else:
+            click.echo("Farmer ID cannot be empty. Please provide a farmer ID.")
+
+    new_farmer = session.query(Farmer).filter_by(id=farmer_id).first() #querying the farmers table and filtering by id 
+
+    if new_farmer: #if the output is true add the produce to the table 
+        produce = Produce(name=name,price=price, farmer=new_farmer)
+        session.add(produce)
+        session.commit()
+        click.echo("Product listed successfully.")
+    else:
+        click.echo("Farmer not found.")
+
+
