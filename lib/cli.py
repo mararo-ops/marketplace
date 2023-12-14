@@ -96,3 +96,19 @@ def add_produce(): #adding a new produce
         click.echo("Farmer not found.")
 
 
+@cli.command()
+def place_order(): #placing an order as a customer
+    """place order as consumer"""
+    click.echo("Enter order details:")
+    while True:
+        consumer_name = click.prompt("Your Name")
+        if consumer_name:
+            break  # non-empty consumer_name is provided
+        else:
+            click.echo("Consumer Name cannot be empty. Please provide your name.")
+    while True:
+        produce_name = click.prompt("Enter the produce name you want to order")
+        if produce_name:
+            break #a non-empty produce_name is provided
+        else:
+            click.echo("Produce Name cannot be empty. Please provide a produce name.")
