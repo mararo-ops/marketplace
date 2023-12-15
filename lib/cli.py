@@ -1,7 +1,7 @@
 import click
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Farmer,Produce,Order,Consumer
+from main import Farmer, Produce, Order, Consumer
 
 # define the database connection 
 DATABASE_URI = 'sqlite:///farmers.db' #path to the database

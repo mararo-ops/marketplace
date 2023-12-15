@@ -17,7 +17,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from models import Base  # Import the Base class from your models module
+from lib.main import Base  # Import the Base class from your models module
 
 # Create an instance of the Base class
 base = Base()
