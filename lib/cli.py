@@ -143,23 +143,6 @@ def list_orders():
     else:
         click.echo("Farmer not found.")
 
-        #leaving a review for a product
-@cli.command()
-def review():
-    """leaving a review for a produce"""
-    produce_name=click.prompt("Enter the produce name")
-    review=click.prompt("Enter a rating  for the product between 1-10",type=int)
-
-    #checking if it's within the range
-    if 1<= review <=10:
-        reviewed_produce=session.query(Produce).filter_by(name=produce_name).first()
-    if reviewed_produce:
-        review=Produce(name=reviewed_produce.name,review=review,price=reviewed_produce.price,farmer_id=reviewed_produce.farmer_id)
-        session.add(review)
-        session.commit()
-        click.echo("review made successfully")
-    else:
-        click.echo("product not found")
 if __name__ == '__main__':
     cli()
     Session = Session()
